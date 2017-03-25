@@ -1,14 +1,14 @@
 '''
-normalizes data and does other things. messy, hcky but so what
+cleans data and does other things. messy, hcky but so what
 '''
 
 #import
 import json
 
-def normalize_lat(coordinate):
+def clean_lat(coordinate):
     return coordinate
 
-def normalize_long(coordinate):
+def clean_long(coordinate):
     return coordinate
 
 def jsonify_post_arr(posts):

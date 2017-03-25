@@ -8,7 +8,7 @@ from bottle import Bottle, request, run
 
 from db import DB
 from posts import Post
-from data_fixer import normalize_lat,normalize_long
+from data_fixer import clean_lat,clean_long
 from data_fixer import dejsonify_posts
 
 import json
@@ -20,8 +20,8 @@ database = DB()
 @api.get('/getposts/<lat>/<long>')
 def get_posts(lat,long):
 
-    lat = normalize_lat(lat)
-    long = normalize_long(long)
+    lat = clean_lat(lat)
+    long = clean_long(long)
 
     print lat + ' ' + long
 
