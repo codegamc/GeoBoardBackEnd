@@ -11,9 +11,6 @@ def normalize_lat(coordinate):
 def normalize_long(coordinate):
     return coordinate
 
-def normalize_alt(coordinate):
-    return coordinate
-
 def jsonify_post_arr(posts):
     posts_dict = {}
     posts_dict["posts"] = []

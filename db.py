@@ -12,16 +12,16 @@ class DB(object):
         self.data = dict()
         self.last_gen = 0
 
-    def find_at(self,lat,long,alt):
+    def find_at(self,lat,long):
         ret = []
-        loca = Location(lat,long,alt)
-        model = Post(0,loca,'','')
+        loca = Location(lat,long,0)
+        model = Post(0,loca,'','','')
         for post in self.data.values():
             if(self.equal_enough(model,post)):
                 ret.append(post)
         return ret
 
-    #usef for finding "close enough to be the same general area" locations
+    #usef for finding "close enough to be the same general area" locations, ignore alt
     def equal_enough(self,a,b):
         return True
 
