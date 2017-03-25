@@ -33,3 +33,8 @@ def jsonify_post_arr(posts):
     json_str = json.dumps(posts_dict)
     return json_str
 
+def dejsonify_posts(post_json):
+    print type(post_json)
+    post_ = json.loads(post_json)
+    return post_
+

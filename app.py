@@ -5,8 +5,12 @@ Back end for GeoBoards project
 '''
 #imports
 from bottle import Bottle, request, run
+
 from db import DB
+from posts import Post
 from data_fixer import normalizeX,normalizeY,normalizeZ
+from data_fixer import dejsonify_posts
+
 import json
 #########################################################
 api = Bottle()
@@ -38,7 +42,19 @@ def get_posts(x,y,z):
 @api.post('/newpost')
 def new_post():
     #saves new post to db
+
     print request
+    print request.json
+    print ''
+    post_dict = request.json
+    #post_dict = dejsonify_posts(post_json)
+    post = Post(database.gen_id(),post_dict['x'],post_dict['y'],post_dict['z'],post_dict['body'])
+    database.add(post.id,post)
+    return 'added!'
 
+@api.get('/dumpdb')
+def dump():
+    database.dump()
+    return 'k'
 
-run(api, host='127.0.0.1',port=3000)
+run(api, host='127.0.0.1',port=3040)

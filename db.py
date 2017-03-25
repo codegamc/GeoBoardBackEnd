@@ -9,6 +9,7 @@ from posts import Post
 class DB(object):
     def __init__(self):
         self.data = dict()
+        self.last_gen = 0
 
     def find_at(self,x,y,z):
         ret = []
@@ -24,3 +25,13 @@ class DB(object):
 
     def add(self,id,obj):
         self.data[id] = obj
+
+    def dump(self):
+        for post in self.data.values():
+            print post.id
+            print post.body
+            print post.x
+
+    def gen_id(self):
+        self.last_gen = 1 + self.last_gen
+        return self.last_gen
