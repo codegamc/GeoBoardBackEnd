@@ -5,13 +5,13 @@ normalizes data and does other things. messy, hcky but so what
 #import
 import json
 
-def normalizeX(coordinate):
+def normalize_lat(coordinate):
     return coordinate
 
-def normalizeY(coordinate):
+def normalize_long(coordinate):
     return coordinate
 
-def normalizeZ(coordinate):
+def normalize_alt(coordinate):
     return coordinate
 
 def jsonify_post_arr(posts):

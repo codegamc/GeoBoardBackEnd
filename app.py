@@ -8,7 +8,7 @@ from bottle import Bottle, request, run
 
 from db import DB
 from posts import Post
-from data_fixer import normalizeX,normalizeY,normalizeZ
+from data_fixer import normalize_lat,normalize_long,normalize_alt
 from data_fixer import dejsonify_posts
 
 import json
@@ -17,37 +17,37 @@ api = Bottle()
 database = DB()
 
 #returns posts
-@api.get('/getposts/<x>/<y>/<z>')
-def get_posts(x,y,z):
+@api.get('/getposts/<lat>/<long>/<alt>')
+def get_posts(lat,long,alt):
 
-    x = normalizeX(x)
-    y = normalizeY(y)
-    z = normalizeZ(z)
+    lat = normalize_lat(lat)
+    long = normalize_long(long)
+    alt = normalize_alt(alt)
 
-    print x + ' ' + y + ' ' + z
+    print lat + ' ' + long + ' ' + alt
 
-    #should return the posts at x,y,z
-    posts_ = database.find_at(x,y,z)
+    #should return the posts at lat,long
+    posts_ = database.find_at(lat,long,alt)
 
     posts = []
     for post in posts_:
         p = dict()
-        p['x'] = post.x
-        p['y'] = post.y
-        p['z'] = post.z
-        p['body'] = post.body
-        p['id'] = post.id
-        p['owner'] = post.owner
+        p['postContent'] = post.post_content
+        p['postID'] = post.id
+        p['dispName'] = post.owner_display_name
+        p['userID'] = post.owner_display_id
+        p['location'] = dict()
+        p['location']['latitude'] = post.location.latitude
+        p['location']['longitude'] = post.location.longitude
+        p['location']['altitude'] = post.location.altitude
         posts.append(p)
 
 
     return_dict = {}
     return_dict['posts'] = posts
-    return_dict['x'] = x
-    return_dict['y'] = y
-    return_dict['z'] = z
-
-    return_dict['is_empty'] = 'false'
+    return_dict['latitude'] = lat
+    return_dict['longitude'] = long
+    return_dict['altitude'] = alt
 
     return json.dumps(return_dict)
 

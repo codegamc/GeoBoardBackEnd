@@ -5,15 +5,17 @@ manual database to store data, real fast/hacky
 '''
 #imports
 from posts import Post
+from posts import Location
 
 class DB(object):
     def __init__(self):
         self.data = dict()
         self.last_gen = 0
 
-    def find_at(self,x,y,z):
+    def find_at(self,lat,long,alt):
         ret = []
-        model = Post(0,x,y,z,'','')
+        loca = Location(lat,long,alt)
+        model = Post(0,loca,'','')
         for post in self.data.values():
             if(self.equal_enough(model,post)):
                 ret.append(post)
@@ -30,7 +32,6 @@ class DB(object):
         for post in self.data.values():
             print post.id
             print post.body
-            print post.x
 
     def gen_id(self):
         self.last_gen = 1 + self.last_gen
