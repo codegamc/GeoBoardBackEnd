@@ -6,7 +6,7 @@ manual database to store data, real fast/hacky
 #imports
 from posts import Post
 
-class db(object):
+class DB(object):
     def __init__(self):
         self.data = dict()
 
@@ -18,10 +18,9 @@ class db(object):
                 ret.append(post)
         return ret
 
-
-
     #usef for finding "close enough to be the same general area" locations
     def equal_enough(self,a,b):
         return True
 
-
+    def add(self,id,obj):
+        self.data[id] = obj
