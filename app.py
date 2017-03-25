@@ -37,6 +37,7 @@ def get_posts(x,y,z):
         p['z'] = post.z
         p['body'] = post.body
         p['id'] = post.id
+        p['owner'] = post.owner
         posts.append(p)
 
 
@@ -60,7 +61,7 @@ def new_post():
     print ''
     post_dict = request.json
     #post_dict = dejsonify_posts(post_json)
-    post = Post(database.gen_id(),post_dict['x'],post_dict['y'],post_dict['z'],post_dict['body'])
+    post = Post(database.gen_id(),post_dict['x'],post_dict['y'],post_dict['z'],post_dict['body'], post_dict['owner'])
     database.add(post.id,post)
     return 'added!'
 
@@ -69,4 +70,4 @@ def dump():
     database.dump()
     return 'k'
 
-run(api, host='localhost',port=3000)
+run(api, host='127.0.0.1',port=3000)
