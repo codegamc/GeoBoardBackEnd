@@ -14,7 +14,7 @@ class DB(object):
     def find_at(self,x,y,z):
         ret = []
         model = Post(0,x,y,z,'')
-        for post in self.data:
+        for post in self.data.values():
             if(self.equal_enough(model,post)):
                 ret.append(post)
         return ret

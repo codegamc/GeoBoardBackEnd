@@ -27,16 +27,28 @@ def get_posts(x,y,z):
     print x + ' ' + y + ' ' + z
 
     #should return the posts at x,y,z
-    posts = database.find_at(x,y,z)
+    posts_ = database.find_at(x,y,z)
 
-    return_dict = json.loads(posts)
+    posts = []
+    for post in posts_:
+        p = dict()
+        p['x'] = post.x
+        p['y'] = post.y
+        p['z'] = post.z
+        p['body'] = post.body
+        p['id'] = post.id
+        posts.append(p)
+
+
+    return_dict = {}
+    return_dict['posts'] = posts
     return_dict['x'] = x
     return_dict['y'] = y
     return_dict['z'] = z
 
     return_dict['is_empty'] = 'false'
 
-    return json.dump(return_dict)
+    return json.dumps(return_dict)
 
 
 @api.post('/newpost')
