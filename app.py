@@ -7,7 +7,7 @@ Back end for GeoBoards project
 from bottle import Bottle, request, run
 
 from db import DB
-from posts import Post
+from posts import Post, Location
 from data_fixer import clean_lat,clean_long
 from data_fixer import dejsonify_posts
 
@@ -35,6 +35,7 @@ def get_posts(lat,long):
         p['postID'] = post.id
         p['dispName'] = post.owner_display_name
         p['userID'] = post.owner_display_id
+        p['timeRemaining'] = post.time_left
         p['location'] = dict()
         p['location']['latitude'] = post.location.latitude
         p['location']['longitude'] = post.location.longitude
@@ -54,17 +55,14 @@ def new_post():
     #saves new post to db
 
     print request
-    print request.json
-    print ''
     post_dict = request.json
     #post_dict = dejsonify_posts(post_json)
-    post_dict['location'] = dict()
-    post_dict['location']['latitude'] = request.json['location']['latitude']
-    post_dict['location']['longitude'] = request.json['location']['longitude']
-    post_dict['location']['altitude'] = request.json['location']['altitude']
     #id,location,body,owner_disp,owner_id
+    lat = post_dict['location']['latitude']
+    long = post_dict['location']['longitude']
+    alt = post_dict['location']['altitude']
     post = Post(database.gen_id(), \
-                post_dict['location'], \
+                Location(lat,long,alt), \
                 post_dict['postContent'], \
                 post_dict['dispName'], \
                 post_dict['userID'])

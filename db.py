@@ -8,6 +8,7 @@ from posts import Post
 from posts import Location
 
 class DB(object):
+
     def __init__(self):
         self.data = dict()
         self.last_gen = 0
@@ -31,7 +32,7 @@ class DB(object):
     def dump(self):
         for post in self.data.values():
             print post.id
-            print post.body
+            print post.post_content
 
     def gen_id(self):
         self.last_gen = 1 + self.last_gen
