@@ -20,3 +20,7 @@ class Location(object):
         self.altitude = alt #altitude
         self.timestamp = timestamp  # altitude
 
+class User(object):
+    def __init__(self,uid, dispName):
+        self.userID = uid
+        self.display_name = dispName

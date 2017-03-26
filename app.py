@@ -76,4 +76,8 @@ def dump():
     database.dump()
     return 'k'
 
+@api.get('/user/<user>')
+def get_user(user):
+    usr = database.get_user(user)
+
 run(api, host='192.241.134.224',port=80)

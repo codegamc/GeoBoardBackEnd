@@ -13,6 +13,7 @@ class DB(object):
 
     def __init__(self):
         self.data = dict()
+        self.user_data = dict()
         self.last_gen = 0
 
     def find_at(self,lat,long):
@@ -39,3 +40,7 @@ class DB(object):
     def gen_id(self):
         self.last_gen = 1 + self.last_gen
         return self.last_gen
+
+    def get_user(self,user):
+        usr = self.user_data[user]
+        return usr
