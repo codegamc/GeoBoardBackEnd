@@ -6,10 +6,13 @@ cleans data and does other things. messy, hcky but so what
 import json
 
 def clean_lat(coordinate):
-    return coordinate
+    return float(coordinate)
 
 def clean_long(coordinate):
-    return coordinate
+    return float(coordinate)
+
+def clean_alt(coordinate):
+    return float(coordinate)
 
 def jsonify_post_arr(posts):
     posts_dict = {}
