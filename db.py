@@ -39,8 +39,6 @@ class DB(object):
             post = parse_dict(post_)
             self.data[post.id] = post
 
-
-
     def find_at(self,lat,long):
         ret = []
         loca = Location(lat,long,0,int(time.time()))
@@ -70,7 +68,7 @@ class DB(object):
             if hasattr(post,'id'):
                 print post.id
                 print post.owner_display_name
-                print post.location.timestamp
+                print post.location.latitude
                 if len(post.post_content) > 40:
                     str_out = post.post_content[0:39]
                 else:

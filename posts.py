@@ -21,9 +21,9 @@ class Post(object):
         p['userID'] = self.owner_display_id
         p['timeRemaining'] = self.time_left
         p['location'] = dict()
-        p['location']['latitude'] = self.location.latitude
-        p['location']['longitude'] = self.location.longitude
-        p['location']['altitude'] = self.location.altitude
+        p['location']['latitude'] = str(self.location.latitude)
+        p['location']['longitude'] = str(self.location.longitude)
+        p['location']['altitude'] = str(self.location.altitude)
         p['location']['timestamp'] = self.location.timestamp
         return p
 
