@@ -6,6 +6,8 @@ manual database to store data, real fast/hacky
 #imports
 from posts import Post
 from posts import Location
+import time
+
 
 class DB(object):
 
@@ -15,7 +17,7 @@ class DB(object):
 
     def find_at(self,lat,long):
         ret = []
-        loca = Location(lat,long,0)
+        loca = Location(lat,long,0,int(time.time()))
         model = Post(0,loca,'','','')
         for post in self.data.values():
             if(self.equal_enough(model,post)):
