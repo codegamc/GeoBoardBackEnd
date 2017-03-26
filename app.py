@@ -23,7 +23,7 @@ def get_posts(lat,long):
     lat = clean_lat(lat)
     long = clean_long(long)
 
-    print lat + ' ' + long
+    print str(lat) + ' ' + str(long)
 
     #should return the posts at lat,long
     posts_ = database.find_at(lat,long)
@@ -40,6 +40,7 @@ def get_posts(lat,long):
         p['location']['latitude'] = post.location.latitude
         p['location']['longitude'] = post.location.longitude
         p['location']['altitude'] = post.location.altitude
+        p['location']['timestamp'] = post.location.timestamp
         posts.append(p)
 
     return_dict = {}
@@ -61,8 +62,9 @@ def new_post():
     lat = post_dict['location']['latitude']
     long = post_dict['location']['longitude']
     alt = post_dict['location']['altitude']
+    timestamp = post_dict['location']['timestamp']
     post = Post(database.gen_id(), \
-                Location(lat,long,alt), \
+                Location(lat,long,alt,timestamp), \
                 post_dict['postContent'], \
                 post_dict['dispName'], \
                 post_dict['userID'])

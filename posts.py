@@ -14,8 +14,9 @@ class Post(object):
         self.time_left = 3600 #timeRemaining
 
 class Location(object):
-    def __init__(self,lat,long,alt):
+    def __init__(self,lat,long,alt,timestamp):
         self.latitude = lat #longitude
         self.longitude = long #latitiude
         self.altitude = alt #altitude
+        self.timestamp = timestamp  # altitude
 
