@@ -6,17 +6,16 @@ Back end for GeoBoards project
 #imports
 from bottle import Bottle, request, run
 
-from pickledb import pickledb
-
 from db import DB
 from posts import Post, Location
 from data_fixer import clean_lat,clean_long
 from data_fixer import dejsonify_posts
-
+import json
 import json
 #########################################################
 api = Bottle()
 database = DB()
+
 
 #returns posts
 @api.get('/getposts/<lat>/<long>')
@@ -32,17 +31,7 @@ def get_posts(lat,long):
 
     posts = []
     for post in posts_:
-        p = dict()
-        p['postContent'] = post.post_content
-        p['postID'] = post.id
-        p['dispName'] = post.owner_display_name
-        p['userID'] = post.owner_display_id
-        p['timeRemaining'] = post.time_left
-        p['location'] = dict()
-        p['location']['latitude'] = post.location.latitude
-        p['location']['longitude'] = post.location.longitude
-        p['location']['altitude'] = post.location.altitude
-        p['location']['timestamp'] = post.location.timestamp
+        p = post.to_dict()
         posts.append(p)
 
     return_dict = {}
