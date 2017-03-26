@@ -27,16 +27,35 @@ class Post(object):
         p['location']['timestamp'] = self.location.timestamp
         return p
 
-    def parse_json(json):
+def parse_dict(p):
+        l = Location(0, 0, 0, 1)
+        p_ = Post(0, l, '', '', '')
 
-        return None
+        try:
+
+
+            p_.post_content = p['postContent']
+            p_.id = p['postID']
+            p_.owner_display_name = p['dispName']
+            p_.owner_display_id = p['userID']
+            p_.time_left = p['timeRemaining']
+
+            p_.location.latitude = p['location']['latitude']
+            p_.location.longitude = p['location']['longitude']
+            p_.location.altitude = p['location']['altitude']
+            p_.location.timestamp = p['location']['timestamp']
+
+            return p_
+        except:
+            return p_
+
 
 class Location(object):
     def __init__(self,lat,long,alt,timestamp):
-        self.latitude = lat #longitude
-        self.longitude = long #latitiude
-        self.altitude = alt #altitude
-        self.timestamp = timestamp  # altitude
+        self.latitude = float(lat) #longitude
+        self.longitude = float(long) #latitiude
+        self.altitude = float(alt) #altitude
+        self.timestamp = timestamp # altitude
 
 class User(object):
     def __init__(self,uid, dispName):

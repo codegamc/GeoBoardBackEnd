@@ -41,7 +41,6 @@ def get_posts(lat,long):
 
     return json.dumps(return_dict)
 
-
 @api.post('/newpost')
 def new_post():
     #saves new post to db
@@ -71,5 +70,9 @@ def dump():
 @api.get('/user/<user>')
 def get_user(user):
     usr = database.get_user(user)
+
+@api.delete('post/<id>')
+def del_post(id):
+    database.rm(id)
 
 run(api, host='192.241.134.224',port=80)
