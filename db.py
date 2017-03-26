@@ -35,7 +35,13 @@ class DB(object):
     def dump(self):
         for post in self.data.values():
             print post.id
-            print post.post_content
+            print post.owner_display_name
+            print post.location.timestamp
+            if len(post.post_content) > 40:
+                str_out = post.post_content[0:39]
+            else:
+                str_out = post.post_content
+            print str_out
 
     def gen_id(self):
         self.last_gen = 1 + self.last_gen

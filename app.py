@@ -6,6 +6,8 @@ Back end for GeoBoards project
 #imports
 from bottle import Bottle, request, run
 
+from pickledb import pickledb
+
 from db import DB
 from posts import Post, Location
 from data_fixer import clean_lat,clean_long
@@ -76,6 +78,7 @@ def dump():
     database.dump()
     return 'k'
 
+#not yet functional
 @api.get('/user/<user>')
 def get_user(user):
     usr = database.get_user(user)
